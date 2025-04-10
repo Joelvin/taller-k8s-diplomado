@@ -10,6 +10,15 @@ public class HelloController {
 
     @GetMapping("/hello")
     public String hello() {
-        return "Hola mundo!";
+    System.out.println("Hello World");
+    return "Hola mundo!";
     }
+    @GetMapping("/bye")
+    public String Goodbye() {
+        System.out.println("Goodbye");
+        return "Goodbye!";
+    }
+
+
+
 }
