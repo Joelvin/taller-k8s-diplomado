@@ -7,10 +7,10 @@ on:
 
 env:
   REGISTRY: ghcr.io
-    IMAGE_NAME: ghcr.io/joelvin/taller-k8s-diplomado  # Ruta completa de la imagen
-    CHART_PATH: chart/taller-k8s-diplomado            # Ruta al Helm chart dentro del repo
-    RELEASE_NAME: v1                # Nombre del release de Helm
-    NAMESPACE: default                  # Namespace en Kubernetes
+    IMAGE_NAME: ghcr.io/joelvin/taller-k8s-diplomado
+    CHART_PATH: chart/taller-k8s-diplomado
+    RELEASE_NAME: v1
+    NAMESPACE: default
 
 jobs:
   build-and-deploy:
