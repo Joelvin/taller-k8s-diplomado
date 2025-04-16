@@ -22,9 +22,7 @@ jobs:
 
       - name: Compilar con Maven
         run: mvn clean package -DskipTests
-        working-directory: ./ # Assuming your pom.xml is in the root of the repository
-        # If your pom.xml is in a subdirectory, for example 'backend', then use:
-        # working-directory: ./backend
+        working-directory: ./ # Asegúrate de que esta ruta sea correcta para tu proyecto
 
       - name: Iniciar sesion en github
         uses: docker/login-action@v3
