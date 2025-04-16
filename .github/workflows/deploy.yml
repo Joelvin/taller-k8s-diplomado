@@ -7,7 +7,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: joelvin/taller-k8s-diplomado  # Sin repetir ghcr.io
+  IMAGE_NAME: joelvin/taller-k8s-diplomado
   CHART_PATH: chart/taller-k8s-diplomado
   RELEASE_NAME: v1
   NAMESPACE: default
