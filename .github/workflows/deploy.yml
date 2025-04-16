@@ -17,10 +17,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Compilar codigo con Maven
+      - name: Compilar con Maven
       - run: mvn clean package -DskipTests
 
-      - name: Checkout codigo
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Iniciar sesion en github
