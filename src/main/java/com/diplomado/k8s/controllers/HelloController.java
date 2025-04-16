@@ -15,7 +15,7 @@ public class HelloController {
     }
     @GetMapping("/bye")
     public String Goodbye() {
-        System.out.println("Goodbye");
+        System.out.println("Goodbye!!!1");
         return "Goodbye!";
     }
 
