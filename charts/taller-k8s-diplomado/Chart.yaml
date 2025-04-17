@@ -1,4 +1,4 @@
 name: api-taller-k8s-diplomado
 version: 0.1.0
-apiVersion: v2
+apiVersion: v1
 description: API de ejemplo para taller con Kubernetes y Helm
