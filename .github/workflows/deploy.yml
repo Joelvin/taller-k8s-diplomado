@@ -8,7 +8,7 @@ on:
 env:
   REGISTRY: docker.io
   IMAGE_NAME: joelvin/taller-k8s-diplomado
-  CHART_PATH: chart/taller-k8s-diplomado
+  CHART_PATH: ./charts/taller-k8s-diplomado
   RELEASE_NAME: v1
   NAMESPACE: default
 
@@ -17,6 +17,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Debug variables
+        run: |
+          echo "RELEASE_NAME: $RELEASE_NAME"
+          echo "CHART_PATH: $CHART_PATH"
+          ls -la $CHART_PATH || echo "Chart path not found"
+
       - name: Checkout code
         uses: actions/checkout@v3
 
