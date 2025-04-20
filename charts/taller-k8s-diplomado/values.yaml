@@ -15,11 +15,11 @@ service:
 
 resources:
   limits:
-    cpu: 100m
-    memory: 512Mi
+    cpu: 300m
+    memory: 384Mi
   requests:
-    cpu: 50m
-    memory: 256Mi
+    cpu: 100m
+    memory: 128Mi
 ingress:
   enabled: false
   className: ""
