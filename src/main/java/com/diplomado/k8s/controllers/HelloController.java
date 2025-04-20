@@ -13,11 +13,7 @@ public class HelloController {
     System.out.println("Hello World!!");
     return "Hola mundo!";
     }
-    @GetMapping("/bye")
-    public String Goodbye() {
-        System.out.println("Goodbye!");
-        return "Goodbye!";
-    }
+
 
 
 
