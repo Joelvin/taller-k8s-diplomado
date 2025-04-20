@@ -9,7 +9,8 @@ env:
   REGISTRY: docker.io
   IMAGE_NAME: joelvin/taller-k8s-diplomado
   CHART_PATH: ./charts/taller-k8s-diplomado
-  RELEASE_NAME: 1.0.0
+  TAG_NAME: 1.0
+  RELEASE_NAME: taller-k8s-diplomado
   NAMESPACE: default
 
 jobs:
@@ -64,7 +65,7 @@ jobs:
           helm upgrade --install $RELEASE_NAME $CHART_PATH \
             --namespace $NAMESPACE \
             --set image.repository=$REGISTRY/$IMAGE_NAME \
-            --set image.tag=$RELEASE_NAME
+            --set image.tag=$TAG_NAME
 
       - name: Desplegando estado
         run: |
