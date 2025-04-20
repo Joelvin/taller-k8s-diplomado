@@ -43,11 +43,11 @@ jobs:
 
       - name: Build imagen Docker
         run: |
-          docker build -t $REGISTRY/$IMAGE_NAME:$RELEASE_NAME .
+          docker build -t $REGISTRY/$IMAGE_NAME:$TAG_NAME .
 
       - name: Push imagen Docker
         run: |
-          docker push $REGISTRY/$IMAGE_NAME:$RELEASE_NAME
+          docker push $REGISTRY/$IMAGE_NAME:$TAG_NAME
 
       - name: Set up kubeconfig
         run: |
@@ -72,7 +72,7 @@ jobs:
           echo "Desplegando estado de deployment y pods"
           kubectl get all -n $NAMESPACE
           kubectl describe deployment api-taller-k8s-diplomado -n $NAMESPACE
-          POD_NAME=$(kubectl get pods -n $NAMESPACE -l app.kubernetes.io/name=api-taller-k8s-diplomado -o jsonpath="{.items[0].metadata.name}")
+          POD_NAME=$(kubectl get pods -n $NAMESPACE -l app.kubernetes.io/name=$IMAGE_NAME -o jsonpath="{.items[0].metadata.name}")
           echo "Logs del pod: $POD_NAME"
           kubectl describe pod $POD_NAME -n $NAMESPACE
           kubectl logs $POD_NAME -n $NAMESPACE
