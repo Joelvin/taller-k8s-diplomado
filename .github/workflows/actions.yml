@@ -10,7 +10,7 @@ env:
   IMAGE_NAME: joelvin/taller-k8s-diplomado
   CHART_PATH: ./charts/taller-k8s-diplomado
   TAG_NAME: "v1"
-  RELEASE_NAME: api-taller-k8s-diplomado
+  RELEASE_NAME: taller-k8s-diplomado
   NAMESPACE: default
 
 jobs:
@@ -66,6 +66,16 @@ jobs:
             --namespace $NAMESPACE \
             --set image.repository=$REGISTRY/$IMAGE_NAME \
             --set image.tag=$TAG_NAME
+
+      - name: Desplegando estado
+        run: |
+          echo "Desplegando estado de deployment y pods"
+          kubectl get all -n $NAMESPACE
+          kubectl describe deployment api-taller-k8s-diplomado -n $NAMESPACE
+          POD_NAME=$(kubectl get pods -n $NAMESPACE -l app.kubernetes.io/name=api-taller-k8s-diplomado -o jsonpath="{.items[0].metadata.name}")
+          echo "Logs del pod: $POD_NAME"
+          kubectl describe pod $POD_NAME -n $NAMESPACE
+          kubectl logs $POD_NAME -n $NAMESPACE
 
       - name: Validar Despliegue 1
         run: |
