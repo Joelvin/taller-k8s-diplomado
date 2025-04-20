@@ -70,20 +70,10 @@ jobs:
       - name: Desplegando estado
         run: |
           echo "Desplegando estado de deployment y pods"
+          kubectl rollout status deployment/taller-k8s-diplomado -n $NAMESPACE --timeout=60s
           kubectl get all -n $NAMESPACE
           kubectl describe deployment taller-k8s-diplomado -n $NAMESPACE
           POD_NAME=$(kubectl get pods -n $NAMESPACE -l app.kubernetes.io/name=taller-k8s-diplomado -o jsonpath="{.items[0].metadata.name}")
           echo "Logs del pod: $POD_NAME"
           kubectl describe pod $POD_NAME -n $NAMESPACE
-          kubectl logs $POD_NAME -n $NAMESPACE
-
-      - name: Validar Despliegue 1
-        run: |
-          kubectl rollout status deployment/taller-k8s-diplomado -n $NAMESPACE --timeout=60s
-          kubectl get pods -n $NAMESPACE
-
-      - name: Ver logs del pod
-        run: |
-          POD_NAME=$(kubectl get pods -n $NAMESPACE -l app.kubernetes.io/name=taller-k8s-diplomado -o jsonpath="{.items[0].metadata.name}")
-          echo "Obteniendo logs del pod: $POD_NAME"
           kubectl logs $POD_NAME -n $NAMESPACE
