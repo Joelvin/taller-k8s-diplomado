@@ -10,7 +10,7 @@ env:
   IMAGE_NAME: joelvin/taller-k8s-diplomado
   CHART_PATH: ./charts/taller-k8s-diplomado
   TAG_NAME: "v1"
-  RELEASE_NAME: taller-k8s-diplomado
+  RELEASE_NAME: api-taller-k8s-diplomado
   NAMESPACE: default
 
 jobs:
