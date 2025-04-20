@@ -5,7 +5,7 @@ serviceAccount:
   name: ""
   
 image:
-  repository: joelvin/api-taller-k8s-diplomado
+  repository: joelvin/taller-k8s-diplomado
   tag: "v1"
   pullPolicy: IfNotPresent
 
