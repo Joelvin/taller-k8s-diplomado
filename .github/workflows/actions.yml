@@ -1,4 +1,4 @@
-name: Pruebas y Despligue en Kubernetes
+name: Deployment Kubernetes
 
 on:
   push:
@@ -20,18 +20,19 @@ jobs:
     steps:
       - name: Debug variables
         run: |
-          echo "RELEASE_NAME: $TAG_NAME"
+          echo "RELEASE_NAME: $RELEASE_NAME"
+          echo "TAG_NAME: $TAG_NAME"
           echo "CHART_PATH: $CHART_PATH"
           ls -la $CHART_PATH || echo "Chart path not found"
 
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Ejecutar pruebas con Maven
+      - name: Test Maven
         run: mvn test
         working-directory: ./
 
-      - name: Compilar con Maven
+      - name: Compile Maven
         run: mvn clean package -DskipTests
         working-directory: ./
 
@@ -67,13 +68,13 @@ jobs:
             --set image.repository=$REGISTRY/$IMAGE_NAME \
             --set image.tag=$TAG_NAME
 
-      - name: Desplegando estado
+      - name: Deployment Status
         run: |
-          echo "Desplegando estado de deployment y pods"
-          kubectl rollout status deployment/taller-k8s-diplomado -n $NAMESPACE --timeout=60s
+          kubectl rollout status deployment/$RELEASE_NAME -n $NAMESPACE --timeout=60s
           kubectl get all -n $NAMESPACE
-          kubectl describe deployment taller-k8s-diplomado -n $NAMESPACE
-          POD_NAME=$(kubectl get pods -n $NAMESPACE -l app.kubernetes.io/name=taller-k8s-diplomado -o jsonpath="{.items[0].metadata.name}")
-          echo "Logs del pod: $POD_NAME"
+
+      - name: POD Logs
+        run: |
+          POD_NAME=$(kubectl get pods -n $NAMESPACE -l "app.kubernetes.io/instance=$RELEASE_NAME" -o jsonpath="{.items[0].metadata.name}")
           kubectl describe pod $POD_NAME -n $NAMESPACE
           kubectl logs $POD_NAME -n $NAMESPACE
