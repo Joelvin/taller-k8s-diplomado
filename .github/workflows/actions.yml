@@ -78,3 +78,4 @@ jobs:
           POD_NAME=$(kubectl get pods -n $NAMESPACE -l "app.kubernetes.io/instance=$RELEASE_NAME" -o jsonpath="{.items[0].metadata.name}")
           kubectl describe pod $POD_NAME -n $NAMESPACE
           kubectl logs $POD_NAME -n $NAMESPACE
+          
