@@ -12,9 +12,6 @@ env:
   TAG_NAME: "v1"
   RELEASE_NAME: taller-k8s-diplomado
   NAMESPACE: default
-  ARGOCD_SERVER: argocd.example.com
-  ARGOCD_USER: admin
-  ARGOCD_PASSWORD: ${{ secrets.ARGOCD_PASSWORD }}
 
 jobs:
   build-and-deploy:
@@ -81,17 +78,3 @@ jobs:
           POD_NAME=$(kubectl get pods -n $NAMESPACE -l "app.kubernetes.io/instance=$RELEASE_NAME" -o jsonpath="{.items[0].metadata.name}")
           kubectl describe pod $POD_NAME -n $NAMESPACE
           kubectl logs $POD_NAME -n $NAMESPACE
-
-      - name: Install Argo
-        run: |
-          curl -sSL -o argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
-          chmod +x argocd
-          sudo mv argocd /usr/local/bin/argocd
-
-      - name: Sync Argo
-        run: |
-          which argocd
-          argocd version
-          argocd login $ARGOCD_SERVER --username $ARGOCD_USER --password $ARGOCD_PASSWORD --insecure
-          argocd app sync $RELEASE_NAME
-          argocd app wait $RELEASE_NAME --timeout 300
