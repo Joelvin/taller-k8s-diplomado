@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: taller-k8s-diplomado
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: taller-k8s-diplomado
+  template:
+    metadata:
+      labels:
+        app: taller-k8s-diplomado
+    spec:
+      containers:
+        - name: taller-k8s-diplomado
+          image: joelvin/taller-k8s-diplomado:v1
+          ports:
+            - containerPort: 8080
